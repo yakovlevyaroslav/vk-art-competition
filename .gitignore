@@ -1,0 +1,35 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.vscode/
+.idea/
+
+# Django
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+*.pot
+*.pyc
+*.log
+local_settings.py
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+*.swp
+*.swo
+*~
+
