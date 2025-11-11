@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!%b$ahim50m7^@m7d8g7pdvmd)n4-#u&$=f87qknxl&zq-f_q0'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-!%b$ahim50m7^@m7d8g7pdvmd)n4-#u&$=f87qknxl&zq-f_q0')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -126,15 +127,21 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React default
-    "http://localhost:5173",  # Vite default
-    "http://localhost:8080",  # Vue default
-    "http://localhost:4200",  # Angular default
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:8080",
-]
+# Можно задать через переменную окружения CORS_ALLOWED_ORIGINS (через запятую)
+# Или использовать значения по умолчанию для разработки
+cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
+if cors_origins and cors_origins[0]:  # Если заданы через .env
+    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins if origin.strip()]
+else:  # Значения по умолчанию для разработки
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",  # React default
+        "http://localhost:5173",  # Vite default
+        "http://localhost:8080",  # Vue default
+        "http://localhost:4200",  # Angular default
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8080",
+    ]
 
 # Разрешить все origins для разработки (раскомментируйте если нужно)
 # CORS_ALLOW_ALL_ORIGINS = True
