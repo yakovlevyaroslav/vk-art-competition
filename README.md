@@ -1,6 +1,6 @@
-# Vote Apps - Конкурс заявок с голосованием
+# Vote Apps - Backend API
 
-Django проект для конкурса с подачей заявок и голосованием.
+Django REST API для конкурса с подачей заявок и голосованием.
 
 ## 🚀 Запуск проекта с нуля
 
@@ -10,16 +10,7 @@ git clone <repository-url>
 cd vote_apps
 ```
 
-### 2. Установка зависимостей для фронтенда
-
-**Требования:** Node.js и npm должны быть установлены
-
-```bash
-# Установка всех npm пакетов
-npm install
-```
-
-### 3. Установка зависимостей для бэкенда
+### 2. Установка зависимостей
 
 **Требования:** Python 3.8+ должен быть установлен
 
@@ -37,7 +28,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Настройка базы данных
+### 3. Настройка базы данных
 
 ```bash
 # Создание миграций
@@ -50,43 +41,13 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-### 5. Сборка фронтенда
+### 4. Запуск сервера
 
-```bash
-# Production сборка (минифицированная)
-npm run build
-
-# Или Development сборка (с source maps)
-npm run build:dev
-```
-
-### 6. Запуск проекта
-
-#### Вариант 1: Production (рекомендуется)
-
-```bash
-# Собрать фронтенд
-npm run build
-
-# Запустить Django сервер
-python manage.py runserver
-```
-
-Откройте в браузере: `http://127.0.0.1:8000`
-
-#### Вариант 2: Development (с hot reload)
-
-**Терминал 1 - Django сервер:**
 ```bash
 python manage.py runserver
 ```
 
-**Терминал 2 - Webpack Dev Server:**
-```bash
-npm run dev
-```
-
-Webpack Dev Server будет доступен на: `http://localhost:9000`
+API будет доступно на: `http://127.0.0.1:8000`
 
 ---
 
@@ -94,19 +55,16 @@ Webpack Dev Server будет доступен на: `http://localhost:9000`
 
 ```
 vote_apps/
-├── src/                    # Исходники фронтенда
-│   ├── js/                 # JavaScript файлы
-│   ├── styles/             # SCSS стили
-│   └── index.html          # HTML шаблон
 ├── vote_apps/              # Django проект
 │   ├── contest/            # Django приложение
-│   ├── static/             # Собранные статические файлы (webpack)
-│   ├── templates/          # HTML шаблоны (webpack)
-│   └── settings.py         # Настройки Django
+│   │   ├── models.py       # Модели данных
+│   │   ├── views.py        # API views
+│   │   ├── urls.py         # API роуты
+│   │   └── admin.py        # Админка
+│   ├── settings.py         # Настройки Django
+│   └── urls.py             # Главные URL
 ├── media/                  # Загруженные файлы (изображения работ)
 ├── manage.py               # Django управляющий скрипт
-├── package.json            # npm зависимости
-├── webpack.config.js       # Конфигурация Webpack
 └── requirements.txt        # Python зависимости
 ```
 
@@ -129,6 +87,15 @@ Content-Type: application/json
 }
 ```
 
+**Ответ при успехе:**
+```json
+{
+    "success": true,
+    "message": "Заявка успешно подана",
+    "application_id": 1
+}
+```
+
 ### Голосование
 ```bash
 POST /api/vote/
@@ -136,6 +103,15 @@ Content-Type: application/json
 
 {
     "application_id": 1
+}
+```
+
+**Ответ при успехе:**
+```json
+{
+    "success": true,
+    "message": "Голос успешно засчитан",
+    "vote_id": 1
 }
 ```
 
@@ -154,6 +130,12 @@ Content-Type: application/json
 
 Логин/пароль: используйте данные суперпользователя, созданного через `createsuperuser`
 
+В админке можно:
+- Просматривать все заявки с превью изображений
+- Просматривать все голоса
+- Редактировать и удалять записи
+- Управлять IP адресами
+
 ---
 
 ## 🛠️ Полезные команды
@@ -168,11 +150,11 @@ python manage.py makemigrations
 # Применение миграций
 python manage.py migrate
 
-# Сборка фронтенда
-npm run build
+# Создание суперпользователя
+python manage.py createsuperuser
 
-# Development режим фронтенда
-npm run dev
+# Запуск сервера
+python manage.py runserver
 ```
 
 ---
@@ -181,5 +163,38 @@ npm run dev
 
 - База данных SQLite создается автоматически при первом запуске
 - Медиа файлы сохраняются в папку `media/contest_works/`
-- Статические файлы собираются в `vote_apps/static/`
-- HTML шаблоны собираются в `vote_apps/templates/`
+- Изображения доступны по URL: `http://127.0.0.1:8000/media/contest_works/filename.png`
+- API работает с CORS (можно подключать любой фронтенд)
+
+---
+
+## 🌐 Настройка для работы с фронтендом
+
+Для работы с отдельным фронтендом настройте CORS в `settings.py`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    'corsheaders',  # pip install django-cors-headers
+]
+
+MIDDLEWARE = [
+    # ...
+    'corsheaders.middleware.CorsMiddleware',
+    # ...
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React
+    "http://localhost:5173",  # Vite
+    "http://localhost:8080",  # Vue
+    # Добавьте URL вашего фронтенда
+]
+```
+
+---
+
+## 📦 Зависимости
+
+- Django 5.2.7
+- Pillow 12.0.0 (для работы с изображениями)
