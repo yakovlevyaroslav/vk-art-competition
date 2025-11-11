@@ -3,9 +3,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.core.files.base import ContentFile
+from PIL import Image
 import json
 import base64
 import uuid
+from io import BytesIO
 from .models import Application, Vote
 
 
@@ -42,6 +44,23 @@ class ApplicationView(View):
                 
                 # Декодируем base64
                 image_bytes = base64.b64decode(image_data)
+                
+                # Проверка размера изображения
+                try:
+                    image = Image.open(BytesIO(image_bytes))
+                    width, height = image.size
+                    
+                    # Минимальный размер: 1000x1000 пикселей
+                    min_size = 1000
+                    if width < min_size or height < min_size:
+                        return JsonResponse({
+                            'error': f'Размер изображения должен быть минимум {min_size}x{min_size} пикселей. Текущий размер: {width}x{height}'
+                        }, status=400)
+                    
+                except Exception as e:
+                    return JsonResponse({
+                        'error': f'Ошибка при проверке изображения: {str(e)}'
+                    }, status=400)
                 
                 # Создаем уникальное имя файла
                 filename = f"work_{uuid.uuid4().hex}.png"
