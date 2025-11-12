@@ -33,10 +33,10 @@ class ApplicationAdmin(admin.ModelAdmin):
     work_image_detail.short_description = "Превью работы"
 
 
-@admin.register(Vote)
-class VoteAdmin(admin.ModelAdmin):
-    list_display = ['application_id', 'voter_ip', 'created_at']
-    list_filter = ['created_at', 'application_id']
-    search_fields = ['application_id', 'voter_ip']
-    readonly_fields = ['created_at']
-    ordering = ['-created_at']
+# @admin.register(Vote)
+# class VoteAdmin(admin.ModelAdmin):
+#     list_display = ['application_id', 'voter_ip', 'created_at']
+#     list_filter = ['created_at', 'application_id']
+#     search_fields = ['application_id', 'voter_ip']
+#     readonly_fields = ['created_at']
+#     ordering = ['-created_at']

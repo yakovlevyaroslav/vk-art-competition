@@ -226,7 +226,7 @@ JAZZMIN_SETTINGS = {
     # Навигация
     "navigation_expanded": True,
     "hide_apps": [],
-    "hide_models": [],
+    "hide_models": ["contest.Vote"],  # Скрыть модель Vote из админки
     
     # Копирайт
     "copyright": "Vote Apps",
