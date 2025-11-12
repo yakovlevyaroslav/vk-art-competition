@@ -32,6 +32,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  # Должен быть ПЕРЕД django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -171,3 +172,100 @@ CORS_ALLOW_HEADERS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Jazzmin настройки (красивый дизайн админки)
+JAZZMIN_SETTINGS = {
+    # Заголовок сайта
+    "site_title": "Vote Apps Admin",
+    "site_header": "Vote Apps",
+    "site_brand": "Vote Apps",
+    "site_logo": None,
+    "login_logo": None,
+    "login_logo_dark": None,
+    "site_logo_classes": "img-circle",
+    "site_icon": None,
+    
+    # Цветовая схема
+    "theme": "default",  # или "dark"
+    "dark_mode_theme": None,
+    
+    # Иконки
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "contest.Application": "fas fa-file-alt",
+        "contest.Vote": "fas fa-vote-yea",
+    },
+    
+    # Меню
+    "topmenu_links": [
+        {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "API", "url": "/api/", "new_window": True},
+    ],
+    
+    # Порядок приложений
+    "order_with_respect_to": [
+        "contest",
+        "auth",
+    ],
+    
+    # Кастомизация
+    "custom_links": {
+        "contest": [{
+            "name": "Статистика",
+            "url": "admin:index",
+            "icon": "fas fa-chart-bar",
+        }]
+    },
+    
+    # Показывать ли иконки в меню
+    "show_sidebar": True,
+    "show_ui_builder": True,  # Позволяет кастомизировать через UI
+    
+    # Навигация
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    
+    # Копирайт
+    "copyright": "Vote Apps",
+    "use_google_fonts_cdn": True,
+    "changeform_format": "horizontal_tabs",  # или "collapsible", "carousel"
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
