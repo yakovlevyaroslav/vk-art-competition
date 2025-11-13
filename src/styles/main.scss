@@ -1,14 +1,13 @@
 // Главный файл стилей - импортирует все модули
 
 // Базовые стили
+@use "base/fonts";
 @use "base/variables";
 @use "base/base";
-@use "base/header";
-@use "base/main";
-@use "base/footer";
-@use "base/responsive";
 
 // Компоненты
-@use "components/forms";
-@use "components/notifications";
 @use "components/buttons";
+
+
+// Стили страницы
+@use "page";

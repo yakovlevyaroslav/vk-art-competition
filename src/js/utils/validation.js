@@ -1,4 +1,9 @@
-import { PHONE_MASK_PATTERN, MAX_FILE_SIZE } from '../constants.js';
+import {
+  PHONE_MASK_PATTERN,
+  MAX_FILE_SIZE,
+  ALLOWED_IMAGE_TYPES,
+  MAX_DESCRIPTION_LENGTH,
+} from '../constants.js';
 
 /**
  * Валидация телефона
@@ -10,15 +15,52 @@ export function validatePhone(phone) {
 }
 
 /**
- * Валидация имени
- * @param {string} name - Имя пользователя
- * @returns {boolean} true, если имя валидно (2-50 символов, только буквы)
+ * Валидация ФИО
+ * @param {string} name - ФИО пользователя
+ * @returns {boolean} true, если имя состоит из 3 слов и содержит только буквы/дефис
  */
-export function validateName(name) {
+export function validateFullName(name) {
   const trimmedName = name.trim();
-  return trimmedName.length >= 2 && 
-         trimmedName.length <= 50 && 
-         /^[а-яА-ЯёЁa-zA-Z\s-]+$/.test(trimmedName);
+  if (!trimmedName) return false;
+
+  const parts = trimmedName.split(/\s+/);
+  if (parts.length !== 3) return false;
+
+  return parts.every((part) => /^[а-яА-ЯёЁa-zA-Z-]+$/.test(part));
+}
+
+/**
+ * Валидация описания идеи
+ * @param {string} description - Описание
+ * @returns {boolean}
+ */
+export function validateDescription(description) {
+  const text = description.trim();
+  return text.length > 0 && text.length <= MAX_DESCRIPTION_LENGTH;
+}
+
+/**
+ * Валидация URL портфолио
+ * @param {string} url - URL адрес
+ * @returns {boolean}
+ */
+export function validatePortfolioUrl(url) {
+  try {
+    const parsed = new URL(url.trim());
+    return ['http:', 'https:'].includes(parsed.protocol);
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Валидация email
+ * @param {string} email - Email
+ * @returns {boolean}
+ */
+export function validateEmail(email) {
+  const trimmedEmail = email.trim();
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(trimmedEmail);
 }
 
 /**
@@ -31,8 +73,8 @@ export function validateFile(file) {
     return { valid: false, message: 'Пожалуйста, выберите файл' };
   }
   
-  if (file.type !== 'image/png') {
-    return { valid: false, message: 'Файл должен быть в формате PNG' };
+  if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+    return { valid: false, message: 'Файл должен быть в формате JPEG или PNG' };
   }
   
   if (file.size > MAX_FILE_SIZE) {
@@ -44,4 +86,13 @@ export function validateFile(file) {
   }
   
   return { valid: true };
+}
+
+/**
+ * Проверяет, что автор загрузил только один файл
+ * @param {FileList} files
+ * @returns {boolean}
+ */
+export function validateSingleFile(files) {
+  return files && files.length === 1;
 }

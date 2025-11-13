@@ -8,6 +8,7 @@ export function showError(elementId, message, inputElement = null) {
   
   // Добавляем класс ошибки к полю ввода, если оно указано
   if (inputElement) {
+    inputElement.classList.remove('success');
     inputElement.classList.add('error');
   }
 }

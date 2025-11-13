@@ -1,4 +1,9 @@
 // Цвета
+$main-blue: #0077FF;
+$main-pink: #FF22A6;
+$main-gray: #EDEDED;
+$input-gray: #F5F5F5;
+
 $primary-color: #4a90e2;
 $secondary-color: #2c3e50;
 $text-color: #333;
@@ -13,13 +18,12 @@ $warning-text: #856404;
 $error-bg: #fff5f5;
 
 // Типографика
-$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-family: 'VK Sans Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
 // Анимации
 $transition-base: 0.3s ease;
-$transition-fast: 0.2s ease;
 
 // Размеры
-$container-max-width: 1200px;
-$border-radius: 8px;
-$border-radius-small: 4px;
+$container-max-width: 1440px;
+$border-radius-normal: 20px;
+$border-radius-big: 40px;

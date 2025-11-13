@@ -4,22 +4,99 @@
 // Buttons
 .btn {
   width: 100%;
-  padding: 14px;
-  background: $primary-color;
-  color: $white;
+  padding: 40px 60px;
   border: none;
-  border-radius: $border-radius-small;
-  font-size: 1.1rem;
-  font-weight: 600;
+  border-radius: $border-radius-normal;
+  font-size: 28px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color $transition-base, transform $transition-fast;
+  transition: background-color $transition-base;
+  background-color: $main-blue;
+  color: white;
+  max-height: 100px;
+  max-width: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    height: 50px;
+    width: 100%;
+    max-width: 275px;
+    min-width: auto;
+    font-size: 16px;
+    padding: 20px 40px;
+    border-radius: 10px;
+  }
 
   &:hover {
-    background: color.adjust($primary-color, $lightness: -10%);
-    transform: translateY(-2px);
+    // background-color: color.scale($main-blue, $lightness: 12%);
+    background-color: black;
   }
 
   &:active {
-    transform: translateY(0);
+    // background-color: color.scale($main-blue, $lightness: 20%);
+    background-color: black;
+  }
+
+  &_white {
+    background-color: white;
+    color: $main-blue;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  
+    &:active {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+a.link {
+  background-color: white;
+  color: $main-blue;
+  border-radius: 60px;
+  padding: 25px 24px;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+
+  &:active {
+    background-color: white;
+    color: black;
+  }
+}
+
+.btn-slider {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 100px;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-image: url('../assets/images/arrow-blue.png');
+
+  @media screen and (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    background-size: 12px;
+  }
+  &_black {
+    background-image: url('../assets/images/arrow-white.png');
+  }
+
+  &_right {
+    transform: rotate(180deg);
+  }
+
+  &.swiper-button-disabled {
+    opacity: .6;
   }
 }

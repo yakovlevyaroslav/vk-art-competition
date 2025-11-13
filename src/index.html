@@ -6,70 +6,581 @@
   <title>VK Art Competition</title>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <h1>Конкурс VK Art</h1>
-      <p class="subtitle">Примите участие в конкурсе и выиграйте призы!</p>
-    </header>
+  <main>
+    <section id="flies">
+      <img class="flies-image flies-image_heart-1" src="<%= require('./assets/images/fly-heart-pink-lil.png') %>" alt="">
+      <img class="flies-image flies-image_heart-2" src="<%= require('./assets/images/fly-heart-pink-megalil.png') %>" alt="">
+      <img class="flies-image flies-image_heart-3" src="<%= require('./assets/images/fly-heartpink-big.png') %>" alt="">
+      <img class="flies-image flies-image_heart-blue" src="<%= require('./assets/images/fly-heart-blue.png') %>" alt="">
 
-    <main class="main">
-      <section class="intro">
-        <h2>О конкурсе</h2>
-        <p>Это удивительный конкурс для талантливых художников. Присылайте свои работы и получайте шанс выиграть ценные призы!</p>
-      </section>
+      <img class="flies-image flies-image_spark-black" src="<%= require('./assets/images/fly-star-black.png') %>" alt="">
+      <img class="flies-image flies-image_spark-pink" src="<%= require('./assets/images/fly-star-pink.png') %>" alt="">
+      <img class="flies-image flies-image_cross" src="<%= require('./assets/images/fly-cross.png') %>" alt="">
+      
+      <img class="flies-image flies-image_portrait-boy" src="<%= require('./assets/images/fly-portret-boy.png') %>" alt="">
+      <img class="flies-image flies-image_portrait-girl" src="<%= require('./assets/images/fly-portret-girl.png') %>" alt="">
 
-      <section class="forms-section">
-        <div class="form-container">
-          <h3>Форма регистрации</h3>
-          <form id="registration-form" class="form" novalidate>
-            <div class="form-group">
-              <label for="name">Имя:</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                placeholder="Введите ваше имя"
-                required
-                minlength="2"
-                maxlength="50"
-              >
-              <span class="error-message" id="name-error"></span>
+      <img class="flies-image flies-image_title-1" src="<%= require('./assets/images/fly-metch.png') %>" alt="">
+      <img class="flies-image flies-image_title-2" src="<%= require('./assets/images/fly-art.png') %>" alt="">
+
+      <img class="flies-image flies-image_text-1" src="<%= require('./assets/images/fly-tag-blue.png') %>" alt="">
+      <img class="flies-image flies-image_text-2" src="<%= require('./assets/images/fly-tag-black.png') %>" alt="">
+      
+      <!-- <div class="flies-image flies-middle"></div> -->
+    </section>
+    
+    <section id="intro">
+      <div class="container">
+        <h1 class="text-black title-main">
+          Покажите, как выглядят ваши чувства
+        </h1>
+        <p class="text-black subtitle">
+          VK&nbsp;Знакомства устраивают конкурс для художников и граффитистов — победитель получит 100 000 рублей
+        </p>
+        <button class="btn btn-to-form">
+          Подать заявку
+        </button>
+      </div>
+    </section>
+
+    <section id="participation">
+      <div class="container">
+        <h2 class="text-white title-main">
+          Как проходит конкурс
+        </h2>
+        <div class="participation-slider">
+          <img class="animated-image participation-image participation-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="">
+          <img class="animated-image participation-image participation-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="">
+          <div class="participation-card participation-card_1">
+            <div class="participation-card__content">
+              <h3 class="participation-card__title">
+                Подготовьте эскиз будущего мурала или граффити — от руки или в графическом редакторе
+              </h3>
+              <p class="participation-card__text">
+                Темы для вдохновения мы перечислим ниже
+              </p>
+              <div class="participation-progress">
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="phone">Телефон:</label>
-              <input 
-                type="tel" 
-                id="phone" 
-                name="phone" 
-                placeholder="+7 (987) 654-32-10"
+          </div>
+          <div class="participation-card participation-card_2">
+            <div class="participation-card__content">
+              <h3 class="participation-card__title">
+                Загрузите эскиз в форму для подачи заявки до 1 декабря
+              </h3>
+              <p class="participation-card__text">
+                Не забудьте кратко описать свою идею и поделиться контактами
+              </p>
+              <div class="participation-progress">
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+              </div>
+            </div>
+          </div>
+          <div class="participation-card participation-card_3">
+            <div class="participation-card__content">
+              <h3 class="participation-card__title">
+                Дождитесь 5 декабря — в этот день мы составим список авторов, которые пройдут в полуфинал
+              </h3>
+              <div class="participation-progress">
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item"></div>
+                <div class="participation-progress-item"></div>
+              </div>
+            </div>
+          </div>
+          <div class="participation-card participation-card_4">
+            <div class="participation-card__content">
+              <h3 class="participation-card__title">
+                Полуфинал пройдёт 11 декабря — участники воплотят свои идеи на арт-дне в Москве
+              </h3>
+              <div class="participation-progress">
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item"></div>
+              </div>
+            </div>
+          </div>
+          <div class="participation-card participation-card_5">
+            <div class="participation-card__content">
+              <h3 class="participation-card__title">
+                Победителя определим с помощью онлайн-голосования
+              </h3>
+              <div class="participation-progress">
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+                <div class="participation-progress-item participation-progress-item_active"></div>
+              </div>
+            </div>
+          </div>
+          <div class="participation-slider__nav">
+            <button
+              class="btn-slider participation-slider__button participation-slider__button_prev"
+              type="button"
+              aria-label="Назад"
+            ></button>
+            <button
+              class="btn-slider btn-slider_right participation-slider__button participation-slider__button_next"
+              type="button"
+              aria-label="Вперед"
+            ></button>
+          </div>
+        </div>
+        <p class="text-white title-main">
+          У каждого участника будет шанс заявить о себе — работы полуфиналистов опубликуем в соцсетях VK&nbsp;Знакомств
+        </p>
+      </div>
+    </section>
+
+    <section id="themes">
+      <h2 class="text-white title-main">
+        Темы и образы
+      </h2>
+      <p class="text-white subtitle">
+        Выбирайте что-то одно или миксуйте все сразу
+      </p>
+
+      <div class="themes-cards">
+        <div class="themes-card themes-card_1">
+          <div class="themes-card-title">
+            Искра
+          </div>
+          <div class="themes-card-text">
+            Момент мэтча, начало отношений, химия между людьми
+          </div>
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-spark.png') %>" alt="">
+        </div>
+        <div class="themes-card themes-card_2">
+          <div class="themes-card-title">
+            Магия совпадений
+          </div>
+          <div class="themes-card-text">
+            Пересечение интересовв профиле, первые переписки, общий вайб
+          </div>
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-magic.png') %>" alt="">
+        </div>
+        <div class="themes-card themes-card_3">
+          <div class="themes-card-title">
+            Встречи с мэтчем
+          </div>
+          <div class="themes-card-text">
+            Момент личного знакомства, прогулки, свидания, путешествия
+          </div>
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-flower.png') %>" alt="">
+        </div>
+        <div class="themes-card themes-card_4">
+          <div class="themes-card-title">
+            Отношения
+          </div>
+          <div class="themes-card-text">
+            Кайфуем друг от друга, поддерживаем и заботимся
+          </div>
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-heart.png') %>" alt="">
+        </div>
+      </div>
+    </section>
+
+    <section id="stop">
+      <div class="container">
+        <h2 class="title-main">
+          Стоп-темы
+        </h2>
+        <ul class="stop-list">
+          <img class="stop-list-image" src="<%= require('./assets/images/stop-heart-blue.png') %>" alt="">
+          <li class="stop-list-item">
+            Политика
+          </li>
+          <li class="stop-list-item">
+            Дискриминация и вражда
+
+            <span>
+              Расизм, сексизм, вопросы религии
+            </span>
+          </li>
+          <li class="stop-list-item">
+            Насилие, агрессия, оскорбления
+          </li>
+          <li class="stop-list-item">
+            Порнография и откровенный <br>
+            сексуальный контент
+          </li>
+        </ul>
+
+        <p class="stop-text">
+          Копировать чужие идеи и работы, а также рекламировать другие бренды запрещено.
+        </p>
+      </div>
+    </section>
+
+    <section id="conditions">
+      <div class="container">
+        <h2 class="text-black title-main">
+          Условия
+        </h2>
+
+        <div class="conditions-cards">
+          <div class="conditions-card">
+            <div class="conditions-card-title">
+              Работы должны быть про VK&nbsp;Знакомства и соответствовать хотя бы одной из предложенных тем
+            </div>
+            <div class="conditions-card-heart">1</div>
+          </div>
+          <div class="conditions-card">
+            <div class="conditions-card-title">
+              В каждом арте должны быть наши ценности:
+            </div>
+            <ul class="conditions-card-list">
+              <li>
+                открытость
+              </li>
+              <li>
+                искренность
+              </li>
+              <li>
+                свобода самовыражения
+              </li>
+              <li>
+                уважение других людей
+              </li>
+            </ul>
+            <div class="conditions-card-heart">2</div>
+          </div>
+          <div class="conditions-card">
+            <div class="conditions-card-title">
+              Используйте цветовую палитру VK&nbsp;Знакомств:
+            </div>
+            <ul class="conditions-card-list">
+              <li>
+                основные цвета — синий и розовый, а также градиент от розового к синему и обратно
+              </li>
+              <li>
+                добавьте белого для света и воздуха
+              </li>
+              <li>
+                черный — только для текстов
+              </li>
+            </ul>
+            <div class="conditions-card-heart">3</div>
+          </div>
+          <div class="conditions-card">
+            <div class="conditions-card-title">
+              Название бренда пишем так: VK&nbsp;Знакомства
+            </div>
+            <div class="conditions-card-text">
+              Можно склонять название, но не изменять его
+            </div>
+            <div class="conditions-card-heart">4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="container">
+        <h2 class="text-white title-main">
+          Этапы конкурса
+        </h2>
+
+        <ul class="timeline-list">
+          <li class="timeline-list-item">
+            <div class="timeline-list-title">
+              Приём заявок:
+            </div>
+            <div class="timeline-list-text">
+              17 ноября — 1 декабря
+            </div>
+          </li>
+          <li class="timeline-list-item">
+            <div class="timeline-list-title">
+              Отбор полуфиналистов:
+            </div>
+            <div class="timeline-list-text">
+              2 — 5 декабря
+            </div>
+          </li>
+          <li class="timeline-list-item">
+            <div class="timeline-list-title">
+              Закрытый арт-день в Москве:
+            </div>
+            <div class="timeline-list-text">
+              11 декабря
+            </div>
+          </li>
+          <li class="timeline-list-item">
+            <div class="timeline-list-title">
+              Открытое голосование:
+            </div>
+            <div class="timeline-list-text">
+              14 — 21 декабря
+            </div>
+          </li>
+          <li class="timeline-list-item">
+            <div class="timeline-list-title">
+              Итоги конкурса:
+            </div>
+            <div class="timeline-list-text">
+              22 декабря
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="registration">
+        <h2 class="title-big">
+          Время творить.<br>
+          Время чувствовать.<br>
+          Время для VK&nbsp;Знакомств.
+        </h2>
+
+        <p class="title-main">
+          Заявка на участие <br>
+          в конкурсе
+        </p>
+
+        <form action="/api/form" id="registration-form" class="registration-form" novalidate>
+          <div class="form-group">
+            <label for="name">ФИО</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Ваше имя или псевдоним"
+              autocomplete="name"
+              required
+            >
+            <span id="name-error" class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="work-file">
+              Диджитал-эскиз* работы в высоком качестве <br>
+              <span>
+                * формат PNG или JPEG, размер от 1000 x 1000 px
+              </span>
+            </label>
+            <div class="custom-file-upload" id="custom-file-upload">
+              <div class="custom-file-upload__content">
+                <span class="custom-file-upload__text">Прикрепить изображение</span>
+                <div class="custom-file-upload__preview"></div>
+              </div>
+              <button type="button" class="custom-file-upload__clear" id="file-clear" aria-label="Очистить файл">&times;</button>
+              <input
+                id="work-file"
+                name="work-file"
+                type="file"
+                accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                required
+                style="display: none;"
+              >
+            </div>
+            <span id="file-error" class="form-error"></span>
+            <div id="file-info" class="form-file-info"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Краткое описание идеи</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="2–3 предложения — о чём ваша любовь?"
+              maxlength="200"
+              rows="4"
+              required
+            ></textarea>
+            <div class="form-field-meta">
+              <span id="description-counter" class="form-counter">0 / 200</span>
+              <span id="description-error" class="form-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="portfolio-url">Ссылка на портфолио или соцсети</label>
+            <input
+              id="portfolio-url"
+              name="portfolio-url"
+              type="url"
+              placeholder="https://"
+              inputmode="url"
+              required
+            >
+            <span id="portfolio-url-error" class="form-error"></span>
+          </div>
+
+          <fieldset class="form-group form-group--contacts">
+            <legend>Контакты для связи</legend>
+            <div class="form-group__field">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="mail@mail.ru"
+                autocomplete="email"
                 required
               >
-              <span class="error-message" id="phone-error"></span>
+              <span id="email-error" class="form-error"></span>
             </div>
-            <div class="form-group">
-              <label for="work-file">Загрузить работу (PNG, не более 20МБ):</label>
-              <input 
-                type="file" 
-                id="work-file" 
-                name="work-file" 
-                accept="image/png"
+            <div class="form-group__field">
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="+7 (___) ___-__-__"
+                inputmode="tel"
                 required
               >
-              <span class="file-info" id="file-info"></span>
-              <span class="error-message" id="file-error"></span>
+              <span id="phone-error" class="form-error"></span>
             </div>
-            <button type="submit" class="btn">Зарегистрироваться</button>
-            <div class="form-notification" id="registration-notification"></div>
-          </form>
+          </fieldset>
+
+          <p class="form-warning">
+            Нажимая «Подать заявку», вы даёте согласие на обработку персональных данных.
+          </p>
+
+          <div id="registration-notification" class="form-notification" role="alert" aria-live="polite"></div>
+
+          <button type="submit" class="btn">Подать заявку</button>
+        </form>
+        <h2 class="title-big title-bottom">
+          Дедлайн — <br> 
+          1 декабря
+        </h2>
+        <p class="subtitle">
+          Не прячьте чувства — покажите их в своих работах!
+        </p>
+      <img class="animated-image registration-image registration-image_spark-blue" src="<%= require('./assets/images/form-star-blue.png') %>" alt="">
+      <img class="animated-image registration-image registration-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="">
+      <img class="animated-image registration-image registration-image_spark-pink" src="<%= require('./assets/images/form-spark-pink.png') %>" alt="">
+    </section>
+
+    <section id="voting">
+      <div class="container">
+        <h2 class="text-white title-main">
+          Выбираем лучшую работу
+        </h2>
+        <p class="text-white subtitle">
+          Полуфиналисты создали эти картины на закрытом арт-дне в Москве. Теперь слово за вами: голосуйте за работу, которая зажгла ваше сердце
+        </p>
+
+        <div class="voting-slider swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/theme-spark.png') %>" alt="Работа «Искра»">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/theme-heart.png') %>" alt="Работа «Чувства на связи»">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/theme-magic.png') %>" alt="Работа «Совпадения»">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/theme-flower.png') %>" alt="Работа «Первое свидание»">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/form-heart.png') %>" alt="Работа «Синхронные сердца»">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="voting-card">
+                <img class="voting-card__image" src="<%= require('./assets/images/form-star-blue.png') %>" alt="Работа «Поймай момент»">
+              </div>
+            </div>
+          </div>
+          <div class="voting-slider__nav">
+            <button
+              class="voting-slider__button voting-slider__button_prev btn-slider"
+              type="button"
+              aria-label="Показать предыдущую работу"
+            ></button>
+            <button
+              class="voting-slider__button voting-slider__button_next btn-slider btn-slider_right"
+              type="button"
+              aria-label="Показать следующую работу"
+            ></button>
+          </div>
         </div>
 
-      </section>
-    </main>
+        <a href="#" class="btn btn_white">
+          Проголосовать
+        </a>
 
-    <footer class="footer">
-      <p>&copy; 2024 VK Art Competition. Все права защищены.</p>
-    </footer>
-  </div>
+        <img class="animated-image voting-heart voting-heart_1" src="<%= require('./assets/images/img-heart-pink-1.png') %>" alt="">
+        <img class="animated-image voting-heart voting-heart_2" src="<%= require('./assets/images/img-heart-pink-2.png') %>" alt="">
+        <img class="animated-image voting-heart voting-heart_3" src="<%= require('./assets/images/img-heart-pink.png') %>" alt="">
+      </div>
+    </section>
+
+    <section id="result">
+      <div class="container">
+        <h2 class="text-white title-main">
+          Итоги конкурса
+        </h2>
+        <p class="text-white subtitle">
+          Голосование завершено: 100 000 рублей и победу забирает [имя победителя], чья работа набрала ХХХ голосов
+        </p>
+
+        <div class="result-images">
+          <div class="animated-image result-image result-image_work"></div>
+          <div class="animated-image result-image result-image_photo"></div>
+          <img class="animated-image result-image result-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="">
+          <img class="animated-image result-image result-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="">
+          <img class="animated-image result-image result-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="">
+        </div>
+
+        <div class="result-bottom">
+          <h2 class="text-white title-main">
+            «Говорят, искусство бессмертно. А я считаю, <br>
+            что самое великое искусство — это Любовь.»
+          </h2>
+          <p class="text-white bottom-text">
+            Имя Фамилия
+          </p>
+          <p class="text-white bottom-text">
+            Спасибо всем, кто творил, чувствовал и голосовал — и до новых встреч!
+          </p>
+          <a href="#" class="link">
+            https://vk.com/
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="wishes">
+      <div class="container">
+        <h2 class="title-big">
+          Пусть ваши чувства <br> 
+          будут такими же яркими, <br>
+          как этот арт, — вместе <br> 
+          с VK&nbsp;Знакомствами!
+        </h2>
+      </div>
+      <div class="animated-image wishes-image wishes-image_spark-blue"></div>
+      <div class="animated-image wishes-image wishes-image_spark-pink"></div>
+    </section> -->
+  </main>
 </body>
 </html>
 
