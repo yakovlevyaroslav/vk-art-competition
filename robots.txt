@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Запрет индексации служебных файлов
+Disallow: /node_modules/
+Disallow: /*.json
+Disallow: /webpack.config.js
+
+# Sitemap (добавьте когда будет готов)
+Sitemap: https://vkdating-matchart.ru/sitemap.xml
+
+# Основные поисковики
+User-agent: Yandex
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+

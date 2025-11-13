@@ -3,28 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VK Art Competition</title>
+  <title>Мэтч-арт — конкурс для уличных художников</title>
+  <meta name="description" content="VK Знакомства разыгрывают 100 000 рублей за самый яркий арт о любви">
+  
+  <!-- SEO теги -->
+  <meta name="keywords" content="конкурс, уличное искусство, граффити, VK Знакомства, арт-конкурс, приз 100000">
+  <meta name="author" content="VK Знакомства">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph для VK и других соцсетей -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Мэтч-арт — конкурс для уличных художников">
+  <meta property="og:description" content="VK Знакомства разыгрывают 100 000 рублей за самый яркий арт о любви">
+  <meta property="og:url" content="https://vkdating-matchart.ru">
+  <!-- <meta property="og:image" content="https://vkdating-matchart.ru/preview.jpg"> -->
+  <meta property="og:site_name" content="Мэтч-арт">
+  <meta property="og:locale" content="ru_RU">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Мэтч-арт — конкурс для уличных художников">
+  <meta name="twitter:description" content="VK Знакомства разыгрывают 100 000 рублей за самый яркий арт о любви">
+  <!-- <meta name="twitter:image" content="https://vkdating-matchart.ru/preview.jpg"> -->
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/dating-vk-favicon.png">
+  
+  <!-- Для Safari на iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Мэтч-арт">
+  
+  <!-- Theme color -->
+  <meta name="theme-color" content="#0077FF">
 </head>
 <body>
   <main>
     <section id="flies">
-      <img class="flies-image flies-image_heart-1" src="<%= require('./assets/images/fly-heart-pink-lil.png') %>" alt="">
-      <img class="flies-image flies-image_heart-2" src="<%= require('./assets/images/fly-heart-pink-megalil.png') %>" alt="">
-      <img class="flies-image flies-image_heart-3" src="<%= require('./assets/images/fly-heartpink-big.png') %>" alt="">
-      <img class="flies-image flies-image_heart-blue" src="<%= require('./assets/images/fly-heart-blue.png') %>" alt="">
+      <img class="flies-image flies-image_heart-1" src="<%= require('./assets/images/fly-heart-pink-lil.png') %>" alt="Декоративное розовое сердце">
+      <img class="flies-image flies-image_heart-2" src="<%= require('./assets/images/fly-heart-pink-megalil.png') %>" alt="Декоративное розовое сердце">
+      <img class="flies-image flies-image_heart-3" src="<%= require('./assets/images/fly-heartpink-big.png') %>" alt="Декоративное большое розовое сердце">
+      <img class="flies-image flies-image_heart-blue" src="<%= require('./assets/images/fly-heart-blue.png') %>" alt="Декоративное синее сердце">
 
-      <img class="flies-image flies-image_spark-black" src="<%= require('./assets/images/fly-star-black.png') %>" alt="">
-      <img class="flies-image flies-image_spark-pink" src="<%= require('./assets/images/fly-star-pink.png') %>" alt="">
-      <img class="flies-image flies-image_cross" src="<%= require('./assets/images/fly-cross.png') %>" alt="">
+      <img class="flies-image flies-image_spark-black" src="<%= require('./assets/images/fly-star-black.png') %>" alt="Декоративная черная звезда">
+      <img class="flies-image flies-image_spark-pink" src="<%= require('./assets/images/fly-star-pink.png') %>" alt="Декоративная розовая звезда">
+      <img class="flies-image flies-image_cross" src="<%= require('./assets/images/fly-cross.png') %>" alt="Декоративный крест">
       
-      <img class="flies-image flies-image_portrait-boy" src="<%= require('./assets/images/fly-portret-boy.png') %>" alt="">
-      <img class="flies-image flies-image_portrait-girl" src="<%= require('./assets/images/fly-portret-girl.png') %>" alt="">
+      <img class="flies-image flies-image_portrait-boy" src="<%= require('./assets/images/fly-portret-boy.png') %>" alt="Портрет молодого человека">
+      <img class="flies-image flies-image_portrait-girl" src="<%= require('./assets/images/fly-portret-girl.png') %>" alt="Портрет девушки">
 
-      <img class="flies-image flies-image_title-1" src="<%= require('./assets/images/fly-metch.png') %>" alt="">
-      <img class="flies-image flies-image_title-2" src="<%= require('./assets/images/fly-art.png') %>" alt="">
+      <img class="flies-image flies-image_title-1" src="<%= require('./assets/images/fly-metch.png') %>" alt="Надпись Мэтч">
+      <img class="flies-image flies-image_title-2" src="<%= require('./assets/images/fly-art.png') %>" alt="Надпись Арт">
 
-      <img class="flies-image flies-image_text-1" src="<%= require('./assets/images/fly-tag-blue.png') %>" alt="">
-      <img class="flies-image flies-image_text-2" src="<%= require('./assets/images/fly-tag-black.png') %>" alt="">
+      <img class="flies-image flies-image_text-1" src="<%= require('./assets/images/fly-tag-blue.png') %>" alt="Декоративный синий тег">
+      <img class="flies-image flies-image_text-2" src="<%= require('./assets/images/fly-tag-black.png') %>" alt="Декоративный черный тег">
       
       <!-- <div class="flies-image flies-middle"></div> -->
     </section>
@@ -49,8 +81,8 @@
           Как проходит конкурс
         </h2>
         <div class="participation-slider">
-          <img class="animated-image participation-image participation-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="">
-          <img class="animated-image participation-image participation-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="">
+          <img class="animated-image participation-image participation-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="Декоративная линия">
+          <img class="animated-image participation-image participation-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="Декоративная линия">
           <div class="participation-card participation-card_1">
             <div class="participation-card__content">
               <h3 class="participation-card__title">
@@ -162,7 +194,7 @@
           <div class="themes-card-text">
             Момент мэтча, начало отношений, химия между людьми
           </div>
-          <img class="themes-card-image" src="<%= require('./assets/images/theme-spark.png') %>" alt="">
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-spark.png') %>" alt="Иллюстрация темы Искра">
         </div>
         <div class="themes-card themes-card_2">
           <div class="themes-card-title">
@@ -171,7 +203,7 @@
           <div class="themes-card-text">
             Пересечение интересовв профиле, первые переписки, общий вайб
           </div>
-          <img class="themes-card-image" src="<%= require('./assets/images/theme-magic.png') %>" alt="">
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-magic.png') %>" alt="Иллюстрация темы Магия совпадений">
         </div>
         <div class="themes-card themes-card_3">
           <div class="themes-card-title">
@@ -180,7 +212,7 @@
           <div class="themes-card-text">
             Момент личного знакомства, прогулки, свидания, путешествия
           </div>
-          <img class="themes-card-image" src="<%= require('./assets/images/theme-flower.png') %>" alt="">
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-flower.png') %>" alt="Иллюстрация темы Встречи с мэтчем">
         </div>
         <div class="themes-card themes-card_4">
           <div class="themes-card-title">
@@ -189,7 +221,7 @@
           <div class="themes-card-text">
             Кайфуем друг от друга, поддерживаем и заботимся
           </div>
-          <img class="themes-card-image" src="<%= require('./assets/images/theme-heart.png') %>" alt="">
+          <img class="themes-card-image" src="<%= require('./assets/images/theme-heart.png') %>" alt="Иллюстрация темы Отношения">
         </div>
       </div>
     </section>
@@ -200,7 +232,7 @@
           Стоп-темы
         </h2>
         <ul class="stop-list">
-          <img class="stop-list-image" src="<%= require('./assets/images/stop-heart-blue.png') %>" alt="">
+          <img class="stop-list-image" src="<%= require('./assets/images/stop-heart-blue.png') %>" alt="Декоративное синее сердце со знаком стоп">
           <li class="stop-list-item">
             Политика
           </li>
@@ -462,9 +494,9 @@
         <p class="subtitle">
           Не прячьте чувства — покажите их в своих работах!
         </p>
-      <img class="animated-image registration-image registration-image_spark-blue" src="<%= require('./assets/images/form-star-blue.png') %>" alt="">
-      <img class="animated-image registration-image registration-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="">
-      <img class="animated-image registration-image registration-image_spark-pink" src="<%= require('./assets/images/form-spark-pink.png') %>" alt="">
+      <img class="animated-image registration-image registration-image_spark-blue" src="<%= require('./assets/images/form-star-blue.png') %>" alt="Декоративная синяя звезда">
+      <img class="animated-image registration-image registration-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="Декоративное розовое сердце">
+      <img class="animated-image registration-image registration-image_spark-pink" src="<%= require('./assets/images/form-spark-pink.png') %>" alt="Декоративная розовая искра">
     </section>
 
     <section id="voting">
@@ -527,9 +559,9 @@
           Проголосовать
         </a>
 
-        <img class="animated-image voting-heart voting-heart_1" src="<%= require('./assets/images/img-heart-pink-1.png') %>" alt="">
-        <img class="animated-image voting-heart voting-heart_2" src="<%= require('./assets/images/img-heart-pink-2.png') %>" alt="">
-        <img class="animated-image voting-heart voting-heart_3" src="<%= require('./assets/images/img-heart-pink.png') %>" alt="">
+        <img class="animated-image voting-heart voting-heart_1" src="<%= require('./assets/images/img-heart-pink-1.png') %>" alt="Декоративное розовое сердце">
+        <img class="animated-image voting-heart voting-heart_2" src="<%= require('./assets/images/img-heart-pink-2.png') %>" alt="Декоративное розовое сердце">
+        <img class="animated-image voting-heart voting-heart_3" src="<%= require('./assets/images/img-heart-pink.png') %>" alt="Декоративное розовое сердце">
       </div>
     </section>
 
@@ -545,9 +577,9 @@
         <div class="result-images">
           <div class="animated-image result-image result-image_work"></div>
           <div class="animated-image result-image result-image_photo"></div>
-          <img class="animated-image result-image result-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="">
-          <img class="animated-image result-image result-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="">
-          <img class="animated-image result-image result-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="">
+          <img class="animated-image result-image result-image_heart" src="<%= require('./assets/images/form-heart.png') %>" alt="Декоративное розовое сердце">
+          <img class="animated-image result-image result-image_scribble-1" src="<%= require('./assets/images/fly-scribble-1.png') %>" alt="Декоративная линия">
+          <img class="animated-image result-image result-image_scribble-2" src="<%= require('./assets/images/fly-scribble-2.png') %>" alt="Декоративная линия">
         </div>
 
         <div class="result-bottom">
