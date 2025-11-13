@@ -25,6 +25,14 @@ module.exports = (env, argv) => {
     port: 9000,
     hot: true,
     open: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'https://match-art-api-v1.ru',
+        changeOrigin: true,
+        secure: false,
+      }
+    ],
   },
   module: {
     rules: [
@@ -89,7 +97,7 @@ module.exports = (env, argv) => {
   },
   plugins: [
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, 'src/assets/favicon.png'),
+      logo: path.resolve(__dirname, 'src/assets/dating-vk-favicon.png'),
       mode: 'webapp',
       devMode: 'webapp',
       favicons: {

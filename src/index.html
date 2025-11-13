@@ -361,6 +361,7 @@
               type="text"
               placeholder="Ваше имя или псевдоним"
               autocomplete="name"
+              maxlength="60"
               required
             >
             <span id="name-error" class="form-error"></span>
@@ -398,12 +399,12 @@
               id="description"
               name="description"
               placeholder="2–3 предложения — о чём ваша любовь?"
-              maxlength="200"
+              maxlength="400"
               rows="4"
               required
             ></textarea>
             <div class="form-field-meta">
-              <span id="description-counter" class="form-counter">0 / 200</span>
+              <span id="description-counter" class="form-counter">0 / 400</span>
               <span id="description-error" class="form-error"></span>
             </div>
           </div>
@@ -416,7 +417,6 @@
               type="url"
               placeholder="https://"
               inputmode="url"
-              required
             >
             <span id="portfolio-url-error" class="form-error"></span>
           </div>

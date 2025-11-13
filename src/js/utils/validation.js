@@ -3,6 +3,8 @@ import {
   MAX_FILE_SIZE,
   ALLOWED_IMAGE_TYPES,
   MAX_DESCRIPTION_LENGTH,
+  MIN_IMAGE_WIDTH,
+  MIN_IMAGE_HEIGHT,
 } from '../constants.js';
 
 /**
@@ -15,18 +17,23 @@ export function validatePhone(phone) {
 }
 
 /**
- * Валидация ФИО
- * @param {string} name - ФИО пользователя
- * @returns {boolean} true, если имя состоит из 3 слов и содержит только буквы/дефис
+ * Валидация имени/псевдонима
+ * @param {string} name - Имя или псевдоним пользователя
+ * @returns {boolean} true, если имя содержит разрешенные символы
  */
 export function validateFullName(name) {
   const trimmedName = name.trim();
   if (!trimmedName) return false;
 
-  const parts = trimmedName.split(/\s+/);
-  if (parts.length !== 3) return false;
+  // Проверяем длину: минимум 2 символа, максимум 60
+  if (trimmedName.length < 2 || trimmedName.length > 60) return false;
 
-  return parts.every((part) => /^[а-яА-ЯёЁa-zA-Z-]+$/.test(part));
+  // Разрешаем:
+  // - русские и английские буквы (любой регистр)
+  // - цифры
+  // - дефисы, нижнее подчеркивание, пробелы
+  // - символы: @ . _ -
+  return /^[а-яА-ЯёЁa-zA-Z0-9\s@._-]+$/.test(trimmedName);
 }
 
 /**
@@ -37,6 +44,29 @@ export function validateFullName(name) {
 export function validateDescription(description) {
   const text = description.trim();
   return text.length > 0 && text.length <= MAX_DESCRIPTION_LENGTH;
+}
+
+/**
+ * Валидация URL портфолио (необязательное поле)
+ * @param {string} url - URL адрес
+ * @param {boolean} required - Является ли поле обязательным
+ * @returns {boolean}
+ */
+export function validatePortfolioUrlOptional(url, required = false) {
+  const trimmedUrl = url.trim();
+  
+  // Если поле пустое и необязательное - валидно
+  if (!trimmedUrl && !required) {
+    return true;
+  }
+  
+  // Если поле пустое и обязательное - невалидно
+  if (!trimmedUrl && required) {
+    return false;
+  }
+  
+  // Если заполнено - проверяем формат
+  return validatePortfolioUrl(trimmedUrl);
 }
 
 /**
@@ -95,4 +125,50 @@ export function validateFile(file) {
  */
 export function validateSingleFile(files) {
   return files && files.length === 1;
+}
+
+/**
+ * Проверяет размеры изображения (минимум 1000x1000px)
+ * @param {File} file - Файл изображения
+ * @returns {Promise<Object>} Результат валидации {valid: boolean, message?: string, width?: number, height?: number}
+ */
+export function validateImageDimensions(file) {
+  return new Promise((resolve) => {
+    if (!file || !file.type.startsWith('image/')) {
+      resolve({ valid: false, message: 'Файл должен быть изображением' });
+      return;
+    }
+
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      
+      const width = img.width;
+      const height = img.height;
+
+      if (width < MIN_IMAGE_WIDTH || height < MIN_IMAGE_HEIGHT) {
+        resolve({
+          valid: false,
+          message: `Размер изображения ${width}x${height}px. Минимальный размер: ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT}px`,
+          width,
+          height,
+        });
+      } else {
+        resolve({
+          valid: true,
+          width,
+          height,
+        });
+      }
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve({ valid: false, message: 'Не удалось загрузить изображение' });
+    };
+
+    img.src = objectUrl;
+  });
 }

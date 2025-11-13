@@ -3,9 +3,10 @@ import {
   validatePhone,
   validateFile,
   validateDescription,
-  validatePortfolioUrl,
+  validatePortfolioUrlOptional,
   validateEmail,
   validateSingleFile,
+  validateImageDimensions,
 } from '../utils/validation.js';
 import { applyPhoneMask } from '../utils/phoneMask.js';
 import {
@@ -108,10 +109,6 @@ export function initRegistrationForm() {
   // Валидация поля имени
   if (nameInput) {
     nameInput.addEventListener('input', () => {
-      const sanitizedValue = nameInput.value.replace(/[^а-яА-ЯёЁa-zA-Z\s-]/g, '');
-      if (sanitizedValue !== nameInput.value) {
-        nameInput.value = sanitizedValue;
-      }
       hideError('name-error', nameInput);
       hideNotification(notificationId);
       resetFieldState(nameInput);
@@ -120,7 +117,7 @@ export function initRegistrationForm() {
     nameInput.addEventListener('blur', (e) => {
       const value = e.target.value.trim();
       if (value && !validateFullName(value)) {
-        showError('name-error', 'Введите полное ФИО из трёх слов, используя только буквы и дефисы', nameInput);
+        showError('name-error', 'Используйте буквы, цифры и символы @ . _ - (до 60 символов)', nameInput);
       } else if (value && validateFullName(value)) {
         hideError('name-error', nameInput);
         setFieldSuccess(nameInput);
@@ -142,7 +139,7 @@ export function initRegistrationForm() {
     descriptionTextarea.addEventListener('blur', (e) => {
       const value = e.target.value;
       if (value && !validateDescription(value)) {
-        showError('description-error', 'Описание обязательно и не должно превышать 200 символов', descriptionTextarea);
+        showError('description-error', 'Описание обязательно и не должно превышать 400 символов', descriptionTextarea);
       } else if (value) {
         hideError('description-error', descriptionTextarea);
         setFieldSuccess(descriptionTextarea);
@@ -154,7 +151,7 @@ export function initRegistrationForm() {
     updateDescriptionCounter();
   }
   
-  // Валидация портфолио
+  // Валидация портфолио (необязательное поле)
   if (portfolioInput) {
     portfolioInput.addEventListener('input', () => {
       hideError('portfolio-url-error', portfolioInput);
@@ -164,12 +161,14 @@ export function initRegistrationForm() {
     
     portfolioInput.addEventListener('blur', (e) => {
       const value = e.target.value.trim();
-      if (value && !validatePortfolioUrl(value)) {
+      // Поле необязательное, но если заполнено - должно быть корректным
+      if (value && !validatePortfolioUrlOptional(value, false)) {
         showError('portfolio-url-error', 'Введите корректный URL, начиная с http(s)://', portfolioInput);
       } else if (value) {
         hideError('portfolio-url-error', portfolioInput);
         setFieldSuccess(portfolioInput);
       } else {
+        // Поле пустое - это нормально, сбрасываем состояние
         resetFieldState(portfolioInput);
       }
     });
@@ -198,7 +197,7 @@ export function initRegistrationForm() {
   
   // Валидация файла
   if (fileInput) {
-    fileInput.addEventListener('change', (e) => {
+    fileInput.addEventListener('change', async (e) => {
       fileInputTouched = true;
       const files = e.target.files;
       const file = files?.[0];
@@ -225,9 +224,19 @@ export function initRegistrationForm() {
           return;
         }
         
+        // Проверяем размеры изображения
+        const dimensionsValidation = await validateImageDimensions(file);
+        if (!dimensionsValidation.valid) {
+          showError('file-error', dimensionsValidation.message, fileInput);
+          e.target.value = '';
+          if (fileInfo) fileInfo.textContent = '';
+          resetPreview();
+          return;
+        }
+        
         const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
         if (fileInfo) {
-          fileInfo.textContent = `Выбран файл: ${file.name} (${sizeMB} МБ)`;
+          fileInfo.textContent = `Выбран файл: ${file.name} (${sizeMB} МБ, ${dimensionsValidation.width}x${dimensionsValidation.height}px)`;
           fileInfo.style.color = '#27ae60';
         }
         
@@ -313,7 +322,7 @@ export function initRegistrationForm() {
     }
     
     // Валидация полей
-    const isValid = validateRegistrationForm({
+    const isValid = await validateRegistrationForm({
       name,
       nameInput,
       phone,
@@ -340,7 +349,7 @@ export function initRegistrationForm() {
         email,
         phone: formatPhoneForSubmission(phone),
         description: description.trim(),
-        portfolio_url: portfolioUrl,
+        portfolio_url: portfolioUrl || null,
         work_image: workImage,
       };
       
@@ -352,11 +361,43 @@ export function initRegistrationForm() {
         body: JSON.stringify(payload),
       });
       
+      // Парсим JSON ответ от сервера
+      const responseData = await response.json();
+      
       if (!response.ok) {
-        throw new Error(`Ошибка отправки формы: ${response.status}`);
+        // Показываем сообщение об ошибке от сервера
+        const errorMessage = responseData.message || responseData.error || `Ошибка ${response.status}`;
+        
+        // Если есть детальные ошибки по полям - показываем их
+        if (responseData.errors) {
+          Object.keys(responseData.errors).forEach((fieldName) => {
+            const errorMsg = responseData.errors[fieldName];
+            
+            // Маппинг полей формы
+            const fieldMap = {
+              'name': { errorId: 'name-error', input: nameInput },
+              'email': { errorId: 'email-error', input: emailInput },
+              'phone': { errorId: 'phone-error', input: phoneInput },
+              'description': { errorId: 'description-error', input: descriptionTextarea },
+              'portfolio_url': { errorId: 'portfolio-url-error', input: portfolioInput },
+              'work_image': { errorId: 'file-error', input: fileInput },
+            };
+            
+            const field = fieldMap[fieldName];
+            if (field) {
+              showError(field.errorId, Array.isArray(errorMsg) ? errorMsg[0] : errorMsg, field.input);
+            }
+          });
+        }
+        
+        showErrorNotification(notificationId, errorMessage);
+        return;
       }
       
-      showSuccess(notificationId, 'Спасибо! Ваша заявка отправлена.');
+      // Показываем сообщение об успехе от сервера
+      const successMessage = responseData.message || 'Спасибо! Ваша заявка отправлена.';
+      showSuccess(notificationId, successMessage);
+      
       registrationForm.reset();
       updateDescriptionCounter();
       resetPreview();
@@ -366,8 +407,16 @@ export function initRegistrationForm() {
         .querySelectorAll('input, textarea')
         .forEach((field) => resetFieldState(field));
     } catch (error) {
-      console.error(error);
-      showErrorNotification(notificationId, 'Не удалось отправить заявку. Попробуйте ещё раз позднее.');
+      console.error('Ошибка отправки формы:', error);
+      
+      // Пытаемся получить сообщение об ошибке
+      let errorMessage = 'Не удалось отправить заявку. Попробуйте ещё раз позднее.';
+      
+      if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      showErrorNotification(notificationId, errorMessage);
     }
     
     return;
@@ -377,9 +426,9 @@ export function initRegistrationForm() {
 /**
  * Валидирует форму регистрации
  * @param {Object} params - параметры формы
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
-function validateRegistrationForm({
+async function validateRegistrationForm({
   name,
   nameInput,
   phone,
@@ -400,7 +449,7 @@ function validateRegistrationForm({
     showError('name-error', 'Поле «ФИО» обязательно для заполнения', nameInput);
     isValid = false;
   } else if (!validateFullName(name)) {
-    showError('name-error', 'Введите полное ФИО из трёх слов, используя только буквы и дефисы', nameInput);
+    showError('name-error', 'Используйте буквы, цифры и символы @ . _ - (до 60 символов)', nameInput);
     isValid = false;
   } else {
     hideError('name-error', nameInput);
@@ -432,27 +481,39 @@ function validateRegistrationForm({
       showError('file-error', 'Можно загрузить только одно изображение', fileInput);
       isValid = false;
     } else {
-      hideError('file-error', fileInput);
-      setFieldSuccess(fileInput);
+      // Проверяем размеры изображения
+      const dimensionsValidation = await validateImageDimensions(file);
+      if (!dimensionsValidation.valid) {
+        showError('file-error', dimensionsValidation.message, fileInput);
+        isValid = false;
+      } else {
+        hideError('file-error', fileInput);
+        setFieldSuccess(fileInput);
+      }
     }
   }
   
   // Валидация описания
   if (!description || !validateDescription(description)) {
-    showError('description-error', 'Описание обязательно и не должно превышать 200 символов', descriptionTextarea);
+    showError('description-error', 'Описание обязательно и не должно превышать 400 символов', descriptionTextarea);
     isValid = false;
   } else {
     hideError('description-error', descriptionTextarea);
     setFieldSuccess(descriptionTextarea);
   }
   
-  // Валидация портфолио
-  if (!portfolioUrl || !validatePortfolioUrl(portfolioUrl)) {
+  // Валидация портфолио (необязательное поле)
+  if (portfolioUrl && !validatePortfolioUrlOptional(portfolioUrl, false)) {
     showError('portfolio-url-error', 'Введите корректный URL, начиная с http(s)://', portfolioInput);
     isValid = false;
-  } else {
+  } else if (portfolioUrl) {
+    // Поле заполнено и валидно
     hideError('portfolio-url-error', portfolioInput);
     setFieldSuccess(portfolioInput);
+  } else {
+    // Поле пустое - это нормально, сбрасываем состояние
+    hideError('portfolio-url-error', portfolioInput);
+    resetFieldState(portfolioInput);
   }
   
   // Валидация email

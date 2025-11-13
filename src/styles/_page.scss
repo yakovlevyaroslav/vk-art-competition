@@ -1175,6 +1175,10 @@ section {
     &::placeholder {
       font-size: 20px;
       color: #939393;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
     }
   }
 
@@ -1266,6 +1270,10 @@ section {
       color: rgba(0, 0, 0, 0.6);
       text-align: center;
       transition: color $transition-base;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
     }
 
     &__preview {
@@ -1399,6 +1407,7 @@ section {
 
     .form-notification {
       font-size: 14px;
+      border-radius: 20px;
     }
 
     label {
