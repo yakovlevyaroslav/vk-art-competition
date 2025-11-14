@@ -450,25 +450,41 @@ section {
 #intro {
 
   @media screen and (max-width: 768px) {
-    margin-top: -80px;
+    margin-top: -100px;
   }
 
   .title-main {
     margin-bottom: 60px;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 30px;
+    }
   }
 
   .subtitle {
     margin-bottom: 80px;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 40px;
+    }
   }
 
   .btn {
     max-width: 310px;
     margin: 0 auto 40px;
+
+    @media screen and (max-width: 768px) {
+      margin: 0 auto;
+    }
   }
 }
 
 #participation {
   background-color: $main-pink;
+
+  .title-main {
+    margin-bottom: 0;
+  }
 
   .participation-image {
     position: absolute;
@@ -584,7 +600,7 @@ section {
     }
 
     .participation-slider {
-      margin: 100px auto 160px;
+      margin: 80px auto 140px;
       width: 315px;
       height: 210px;
       position: relative;
@@ -627,6 +643,10 @@ section {
 
   h2 {
     margin-bottom: 80px;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 40px;
+    }
   }
 
   .conditions-cards {
@@ -725,10 +745,18 @@ section {
 
   h2.title-main {
     margin-bottom: 60px;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 30px;
+    }
   }
 
   p.subtitle {
     margin-bottom: 80px;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 40px;
+    }
   }
 
   .themes-cards {
@@ -891,6 +919,11 @@ section {
 
 #stop {
   background-color: $main-gray;
+  padding: 120px 0 50px;
+
+  @media screen and (max-width: 768px) {
+    padding: 60px 0 50px;
+  }
 
   .title-main {
     margin-bottom: 80px;
@@ -935,14 +968,16 @@ section {
     font-size: 28px;
     font-weight: 600;
     text-align: center;
-    margin-top: 90px;
+    margin: 90px auto 0;
+    max-width: 722px;
   }
 
   @media screen and (max-width: 768px) {
 
     .stop-text {
-      font-size: 20px;
-      margin-top: 60px;
+      font-size: 18px;
+      margin-top: 40px;
+      max-width: 315px;
     }
 
     .title-main {
@@ -966,6 +1001,10 @@ section {
         span {
           margin-top: 10px;
           font-size: 14px;
+        }
+
+        &:last-child {
+          border: none;
         }
       }
     }
@@ -1009,7 +1048,7 @@ section {
 
   @media screen and (max-width: 768px) {
     .title-main {
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
     .timeline-list {
@@ -1030,9 +1069,20 @@ section {
 #registration {
   background-color: $main-gray;
   position: relative;
+
+  .title-big.title-top {
+    margin-bottom: 0;
+  }
   
-  .title-main {
-    margin-bottom: 60px;
+  .title-main.title-top {
+    padding-bottom: 60px;
+    padding-top: 80px;
+    margin-bottom: 0;
+
+    @media screen and (max-width: 768px) {
+      padding-bottom: 30px;
+      padding-top: 40px;
+    }
   }
 
   .title-big.title-bottom {
@@ -1040,6 +1090,10 @@ section {
 
     br {
       display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 40px;
     }
   }
 
@@ -1105,26 +1159,47 @@ section {
         display: block;
       }
     }
+
+    p.subtitle {
+      @media screen and (max-width: 768px) {
+        max-width: 315px;
+        margin: 0 auto;
+      }
+    }
   }
 
   @media screen and (max-width: 480px) {
+
+    .title-big.title-top {
+      font-size: 26px;
+    }
 
     .registration-image {
       &_spark-blue {
         width: 55px;
         height: 60px;
-        transform: translate(-200px, -980px);
+        transform: translate(-180px, -810px);
+      }
+
+      &_heart {
+        width: 50px;
+        height: 50px;
+        transform: translate(120px, -800px);
       }
 
       &_spark-pink {
         width: 45px;
         height: 50px;
-        transform: translate(120px, -820px);
+        transform: translate(-150px, 670px);
       }
     }
 
+    .subtitle {
+      margin-bottom: 0;
+    }
+
     .title-big.title-bottom {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
 
       br {
         display: block;
@@ -1390,6 +1465,7 @@ section {
     padding: 20px;
     border-radius: 24px;
     margin: 0 auto 60px;
+    gap: 20px;
 
     .form-error,
     .form-file-info,
@@ -1471,6 +1547,14 @@ section {
 
     @media screen and (max-width: 768px) {
       padding: 0 30px;
+    }
+
+    @media screen and (max-width: 480px) {
+      padding: 0 35px;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding: 0 5px;
     }
   }
 
@@ -1604,6 +1688,13 @@ section {
     }
   }
 
+  @media screen and (max-width: 1280px) {
+    .voting-card__image {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
   @media screen and (max-width: 980px) {
 
     .voting-card {
@@ -1658,7 +1749,6 @@ section {
 
     .subtitle {
       margin-bottom: 40px;
-      padding: 0 30px;
     }
 
     .swiper-slide {

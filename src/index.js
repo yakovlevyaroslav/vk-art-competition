@@ -6,7 +6,6 @@ import 'swiper/css/navigation';
 import { initRegistrationForm } from './js/forms/registration.js';
 import { initFliesAnimation } from './js/animation-gsap.js';
 import { ParticipationSlider } from './js/participation-slider.js';
-import { ScrollHijack } from './js/scroll-hijack.js';
 
 /**
  * Инициализирует плавную прокрутку для якорных ссылок
@@ -42,7 +41,7 @@ function initScrollToForm() {
 
   btnToForm.addEventListener('click', (e) => {
     e.preventDefault();
-    const registrationBlock = document.getElementById('registration');
+    const registrationBlock = document.querySelector('#registration .title-main');
 
     if (registrationBlock) {
       registrationBlock.scrollIntoView({
@@ -56,14 +55,9 @@ function initScrollToForm() {
 
 /**
  * Инициализирует слайдер participation-slider с эффектом перелистывания карт
- * и систему перехвата скролла
  */
 function initParticipationSlider() {
   const participationSlider = new ParticipationSlider();
-  
-  // Инициализируем перехват скролла для управления слайдером
-  // eslint-disable-next-line no-new
-  new ScrollHijack(participationSlider);
   
   return participationSlider;
 }

@@ -25,6 +25,7 @@ class ParticipationSlider {
 
     this.setupInitialState();
     this.bindEvents();
+    this.updateButtonsState();
   }
 
   /**
@@ -101,9 +102,11 @@ class ParticipationSlider {
    */
   next() {
     if (this.isAnimating) return;
+    if (this.currentIndex >= this.totalCards - 1) return;
 
-    this.currentIndex = (this.currentIndex + 1) % this.totalCards;
+    this.currentIndex = this.currentIndex + 1;
     this.animateTransition('forward');
+    this.updateButtonsState();
   }
 
   /**
@@ -111,9 +114,11 @@ class ParticipationSlider {
    */
   prev() {
     if (this.isAnimating) return;
+    if (this.currentIndex <= 0) return;
 
-    this.currentIndex = (this.currentIndex - 1 + this.totalCards) % this.totalCards;
+    this.currentIndex = this.currentIndex - 1;
     this.animateTransition('backward');
+    this.updateButtonsState();
   }
 
   /**
@@ -225,6 +230,33 @@ class ParticipationSlider {
   }
 
   /**
+   * Обновление состояния кнопок навигации
+   */
+  updateButtonsState() {
+    // Отключаем кнопку "назад" на первом слайде
+    if (this.prevButton) {
+      if (this.currentIndex === 0) {
+        this.prevButton.disabled = true;
+        this.prevButton.setAttribute('aria-disabled', 'true');
+      } else {
+        this.prevButton.disabled = false;
+        this.prevButton.setAttribute('aria-disabled', 'false');
+      }
+    }
+
+    // Отключаем кнопку "вперед" на последнем слайде
+    if (this.nextButton) {
+      if (this.currentIndex >= this.totalCards - 1) {
+        this.nextButton.disabled = true;
+        this.nextButton.setAttribute('aria-disabled', 'true');
+      } else {
+        this.nextButton.disabled = false;
+        this.nextButton.setAttribute('aria-disabled', 'false');
+      }
+    }
+  }
+
+  /**
    * Привязка обработчиков событий
    */
   bindEvents() {
@@ -256,15 +288,17 @@ class ParticipationSlider {
               this.prev();
             }
           }
+          // Обновляем состояние кнопок после переключения
+          this.updateButtonsState();
         }
       });
     });
 
     // Поддержка клавиатуры
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
+      if (e.key === 'ArrowLeft' && this.currentIndex > 0) {
         this.prev();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight' && this.currentIndex < this.totalCards - 1) {
         this.next();
       }
     });
