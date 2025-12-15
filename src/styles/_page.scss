@@ -1076,7 +1076,8 @@ section {
 }
 
 #timeline {
-  background-color: $main-pink;
+  // background-color: $main-pink;
+  background-color: $main-blue;
 
   .title-main {
     margin-bottom: 100px;
@@ -1575,8 +1576,11 @@ section {
 }
 
 #voting {
-  background-color: $main-blue;
+  // background-color: $main-blue;
+  background-color: $main-pink;
   position: relative;
+
+  padding: 120px 0 180px;
 
   .btn {
     margin: 160px auto 0;
